@@ -159,41 +159,46 @@
       </main>
     </div>
     <script>
-      // Set the date and time the submarine was launched
-      const launchDate = new Date(Date.UTC(2023, 5, 18, 12, 0, 0));
+      setTimeout(() => {
+        // Set the date and time the submarine was launched
+        const launchDate = new Date(Date.UTC(2023, 5, 18, 12, 0, 0));
 
-      // Set the total oxygen supply in hours
-      const totalOxygenSupply = 96;
+        // Set the total oxygen supply in hours
+        const totalOxygenSupply = 96;
 
-      // Get the current date and time
-      const currentDate = new Date();
+        // Get the current date and time
+        const currentDate = new Date();
 
-      // Calculate the difference in milliseconds
-      const difference = currentDate - launchDate;
+        // Calculate the difference in milliseconds
+        const difference = currentDate - launchDate;
 
-      // Convert the difference to hours
-      const differenceInHours = difference / 1000 / 60 / 60;
+        // Convert the difference to hours
+        const differenceInHours = difference / 1000 / 60 / 60;
 
-      // Calculate the remaining oxygen supply
-      const remainingOxygenSupply = totalOxygenSupply - differenceInHours;
+        // Calculate the remaining oxygen supply
+        const remainingOxygenSupply = totalOxygenSupply - differenceInHours;
 
-      // Convert the decimal part of the hours to minutes
-      const remainingMinutes = (remainingOxygenSupply % 1) * 60;
+        // Convert the decimal part of the hours to minutes
+        const remainingMinutes = (remainingOxygenSupply % 1) * 60;
 
-      const minuteString = remainingMinutes == 1 ? "minute" : "minutes";
+        const minuteString = remainingMinutes == 1 ? "minute" : "minutes";
+        const hourString = remainingOxygenSupply == 1 ? "hour" : "hours";
 
-      if (remainingMinutes <= 0 && remainingOxygenSupply <= 0) {
-        document.getElementById("oxygenSupply").innerHtml = "None.";
-      } else {
-        // Display the remaining oxygen supply
-        document.getElementById("oxygenSupply").innerHTML =
-          Math.floor(remainingOxygenSupply) +
-          " hours and " +
-          Math.floor(remainingMinutes) +
-          " " +
-          minuteString +
-          ".";
-      }
+        if (remainingMinutes <= 0 && remainingOxygenSupply <= 0) {
+          document.getElementById("oxygenSupply").innerHtml = "None.";
+        } else {
+          // Display the remaining oxygen supply
+          document.getElementById("oxygenSupply").innerHTML =
+            Math.floor(remainingOxygenSupply) +
+            " " +
+            hourString +
+            " and " +
+            Math.floor(remainingMinutes) +
+            " " +
+            minuteString +
+            ".";
+        }
+      }, 30 * 1000);
     </script>
   </body>
 </html>
