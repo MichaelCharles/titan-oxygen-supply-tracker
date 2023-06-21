@@ -159,7 +159,7 @@
       </main>
     </div>
     <script>
-      setTimeout(() => {
+      const render = () => {
         // Set the date and time the submarine was launched
         const launchDate = new Date(Date.UTC(2023, 5, 18, 12, 0, 0));
 
@@ -198,7 +198,9 @@
             minuteString +
             ".";
         }
-      }, 25_000);
+      };
+      setInterval(render, 25_000);
+      render();
     </script>
   </body>
 </html>
