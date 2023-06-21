@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Oxygen Supply Tracker</title>
+  </head>
+  <style>
+    /* css normalizing foundation: https://jaydenseric.com/blog/forget-normalize-or-resets-lay-your-own-css-foundation */
+    html {
+      -ms-text-size-adjust: 100%;
+      -webkit-text-size-adjust: 100%;
+    }
+    body {
+      margin: 0;
+      font: 16px/1 sans-serif;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    blockquote,
+    figure,
+    ol,
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+    main,
+    li {
+      display: block;
+    }
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-size: inherit;
+    }
+    strong {
+      font-weight: bold;
+    }
+    a,
+    button {
+      color: inherit;
+      transition: 0.3s;
+    }
+    a {
+      text-decoration: none;
+    }
+    button {
+      overflow: visible;
+      border: 0;
+      font: inherit;
+      -webkit-font-smoothing: inherit;
+      letter-spacing: inherit;
+      background: none;
+      cursor: pointer;
+    }
+    ::-moz-focus-inner {
+      padding: 0;
+      border: 0;
+    }
+    :focus {
+      outline: 0;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 0;
+    }
+
+    /* my styles start here */
+
+    html,
+    body {
+      font-family: "Hiragino Kaku Gothic Pro", "Yu Gothic", "Meiryo",
+        "MS Gothic", "Arial Unicode MS", "ヒラギノ角ゴ Pro W3", "メイリオ",
+        "ＭＳ ゴシック", "Osaka", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+      background: #f2f2f2;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    #flex-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-width: 100vw;
+    }
+
+    main {
+      max-width: 600px;
+      width: 100%;
+    }
+    p {
+      font-size: 1.2em;
+      margin-bottom: 0.75rem;
+      color: rgba(33, 33, 33, 0.7);
+      line-height: 1.5;
+    }
+    h1 {
+      font-size: 2em;
+      color: rgba(33, 33, 33, 0.9);
+      margin-bottom: 0.75rem;
+    }
+    h2 {
+      font-size: 1.75em;
+      margin-bottom: 0.75rem;
+      color: rgba(33, 33, 33, 0.9);
+      font-weight: 900;
+    }
+    h3 {
+      font-size: 1.5em;
+      color: rgba(33, 33, 33, 0.9);
+      margin-bottom: 0.75rem;
+    }
+    #oxygenSupply {
+      color: orangered;
+    }
+  </style>
+  <body>
+    <div id="flex-wrap">
+      <main>
+        <h1>
+          Remaining Oxygen Supply Tracker for the
+          <span id="oceanGateTitan">OceanGate Titan</span> Submarine
+        </h1>
+        <p>
+          Calculations are based on the assumption of a 96-hour oxygen supply,
+          with the Titan submerging on June 18th at 9 AM Atlantic Daylight Time.
+        </p>
+        <h3>Remaining oxygen supply:</h3>
+        <h2 id="oxygenSupply"></h2>
+      </main>
+    </div>
+    <script>
+      // Set the date and time the submarine was launched
+      const launchDate = new Date(Date.UTC(2023, 5, 18, 12, 0, 0));
+
+      // Set the total oxygen supply in hours
+      const totalOxygenSupply = 96;
+
+      // Get the current date and time
+      const currentDate = new Date();
+
+      // Calculate the difference in milliseconds
+      const difference = currentDate - launchDate;
+
+      // Convert the difference to hours
+      const differenceInHours = difference / 1000 / 60 / 60;
+
+      // Calculate the remaining oxygen supply
+      const remainingOxygenSupply = totalOxygenSupply - differenceInHours;
+
+      // Convert the decimal part of the hours to minutes
+      const remainingMinutes = (remainingOxygenSupply % 1) * 60;
+
+      const minuteString = remainingMinutes == 1 ? "minute" : "minutes";
+
+      if (remainingMinutes <= 0 && remainingOxygenSupply <= 0) {
+        document.getElementById("oxygenSupply").innerHtml = "None.";
+      } else {
+        // Display the remaining oxygen supply
+        document.getElementById("oxygenSupply").innerHTML =
+          Math.floor(remainingOxygenSupply) +
+          " hours and " +
+          Math.floor(remainingMinutes) +
+          " " +
+          minuteString +
+          ".";
+      }
+    </script>
+  </body>
+</html>
