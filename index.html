@@ -184,8 +184,8 @@
         // Convert the decimal part of the hours to minutes
         const remainingMinutes = (remainingOxygenSupply % 1) * 60;
 
-        const minuteString = remainingMinutes == 1 ? "minute" : "minutes";
-        const hourString = remainingOxygenSupply == 1 ? "hour" : "hours";
+        const minuteString = Math.floor(remainingMinutes) == 1 ? "minute" : "minutes";
+        const hourString = Math.floor(remainingOxygenSupply) == 1 ? "hour" : "hours";
 
         if (remainingMinutes <= 0 && remainingOxygenSupply <= 0) {
           document.getElementById("oxygenSupply").innerHtml = "None.";
